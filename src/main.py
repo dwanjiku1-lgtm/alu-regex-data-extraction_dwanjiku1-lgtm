@@ -88,3 +88,31 @@ class SecurityDataExtractor:
           'urls': urls,
           'phone_numbers': phones,
       }
+    def main():
+  # Dynamically resolve paths relative to main.py position
+  script_dir = os.path.dirname(os.path.abspath(__file__))
+  project_root = os.path.abspath(os.path.join(script_dir, '..'))
+
+  input_file = os.path.join(project_root, 'input', 'raw-text.txt')
+  output_file = os.path.join(project_root, 'output', 'sample-output.json')
+
+  try:
+    with open(input_file, 'r', encoding='utf-8') as f:
+      raw_data = f.read()
+  except FileNotFoundError:
+    print(f'Error: Could not find file at {input_file}')
+    return
+
+  extractor = SecurityDataExtractor()
+  results = extractor.process_data(raw_data)
+
+  os.makedirs(os.path.dirname(output_file), exist_ok=True)
+  with open(output_file, 'w', encoding='utf-8') as f:
+    json.dump(results, f, indent=4)
+
+  print('Data Extraction Complete. Sample Output:\n')
+  print(json.dumps(results, indent=2))
+
+
+if __name__ == '__main__':
+  main()
