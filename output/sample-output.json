@@ -1,0 +1,26 @@
+{
+    "alu_emails": [
+        "d********i@alumni.alueducation.com",
+        "b*********x@alueducation.com",
+        "i*********h@si.alueducation.com",
+        "a**********e@alueducation.com",
+        "f********f@alueducation.com"
+    ],
+    "masked_credit_cards": [
+        "****-****-****-1881",
+        "****-****-****-0002"
+    ],
+    "urls": [
+        "http://phishing-login.ru/verify?redirect=true",
+        "www.alueducation.com/admissions",
+        "https://portal.alueducation.com/dashboard?user=active",
+        "http://api.legacy-system.org/v1/sync"
+    ],
+    "phone_numbers": [
+        "+34 91 123 4567",
+        "+256 788123456",
+        "+254 712 345 678",
+        "+250 788 123 456",
+        "+1 800 555 0199"
+    ]
+}
