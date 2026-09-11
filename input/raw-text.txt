@@ -1,0 +1,27 @@
+IT Service Desk Log & Communications Dump - March 2026
+
+=== Section 1: User Directory & Support Contacts ===
+- Lead Campus Admin: admin.office@alueducation.com (Verified ALU Staff)
+- Alumni Representative: dev.alumni@alumni.alueducation.com (Kigali Campus)
+- Student Intern: intern.tech@si.alueducation.com (Active SI)
+- Malicious Input Attempt: attacker<script>alert('xss')</script>@external.com
+- Malformed Emails: user@domain, bad..syntax@alueducation.com, fake.staff@alueducation.com.spoof.net
+
+=== Section 2: Regional Campus Contact Numbers ===
+- Rwanda Support Desk: +250 788 123 456
+- Kenya Admissions Office: +254 712 345 678
+- Europe Liaison Office: +34 91 123 4567
+- USA Toll-Free Line: +1 800 555 0199
+- Local Unformatted Line: +256 788123456
+- Invalid Phone Number: +250-12 (too short)
+
+=== Section 3: Billing & Card Processing Records ===
+- Student Card on File (Visa): 4012 8888 8888 1881
+- Secondary Card (Mastercard): 5412-7512-3412-8910
+- Test Card (Fails Luhn Validation): 4000-0000-0000-0002
+
+=== Section 4: Portal Links & System Endpoints ===
+- Student Portal: https://portal.alueducation.com/dashboard?user=active
+- Public Website: www.alueducation.com/admissions
+- HTTP Legacy API: http://api.legacy-system.org/v1/sync
+- Phishing Gateway Attempt: http://phishing-login.ru/verify?redirect=true
