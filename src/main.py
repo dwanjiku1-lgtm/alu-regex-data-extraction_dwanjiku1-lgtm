@@ -58,3 +58,33 @@ class SecurityDataExtractor:
     def sanitize_input(self, text: str) -> str:
       """Strips HTML and Script tags to prevent injection risks."""
       return re.sub(r'<[^>]*>', '', text)
+    def process_data(self, raw_text: str) -> dict:
+      """Pre-processes text, extracts matched data, and applies security masking."""
+      clean_text = self.sanitize_input(raw_text)
+
+      # Extract & Validate Credit Cards
+      raw_cards = self.card_pattern.findall(clean_text)
+      valid_cards = [
+          self.mask_credit_card(card)
+          for card in raw_cards
+          if self.is_valid_luhn(card)
+      ]
+
+      # Extract URLs
+      urls = list(set(self.url_pattern.findall(clean_text)))
+
+      # Extract International Phone Numbers
+      phones = list(set(self.phone_pattern.findall(clean_text)))
+
+      # Extract & Mask ALU Emails
+      raw_emails = set(
+          match.group(0) for match in self.email_pattern.finditer(clean_text)
+      )
+      masked_emails = [self.mask_email(email) for email in raw_emails]
+
+      return {
+          'alu_emails': masked_emails,
+          'masked_credit_cards': valid_cards,
+          'urls': urls,
+          'phone_numbers': phones,
+      }
