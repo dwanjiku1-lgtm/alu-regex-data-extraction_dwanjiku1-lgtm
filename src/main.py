@@ -23,3 +23,38 @@ class SecurityDataExtractor:
     self.phone_pattern = re.compile(
         r'\+(?:[0-9]{1,3})[ -]?\(?[0-9]{1,4}\)?[ -]?[0-9]{2,4}[ -]?[0-9]{3,4}\b'
     )
+    def is_valid_luhn(self, card_str: str) -> bool:
+      """Validates credit card numbers using the Luhn Algorithm (Mod 10)."""
+      digits = [int(char) for char in re.sub(r'\D', '', card_str)]
+      if not digits or len(digits) < 13:
+        return False
+
+      checksum = 0
+      reversed_digits = digits[::-1]
+
+      for index, digit in enumerate(reversed_digits):
+        if index % 2 == 1:
+          doubled = digit * 2
+          checksum += doubled - 9 if doubled > 9 else doubled
+        else:
+          checksum += digit
+
+      return checksum % 10 == 0
+
+    def mask_credit_card(self, card_str: str) -> str:
+      """Masks credit card numbers so only the last four digits remain visible."""
+      clean_digits = re.sub(r'\D', '', card_str)
+      return f'****-****-****-{clean_digits[-4:]}'
+
+    def mask_email(self, email_str: str) -> str:
+      """Masks email usernames to protect personal data (e.g., a****e@alueducation.com)."""
+      username, domain = email_str.split('@')
+      if len(username) <= 2:
+        masked_user = username[0] + '*'
+      else:
+        masked_user = username[0] + '*' * (len(username) - 2) + username[-1]
+      return f'{masked_user}@{domain}'
+
+    def sanitize_input(self, text: str) -> str:
+      """Strips HTML and Script tags to prevent injection risks."""
+      return re.sub(r'<[^>]*>', '', text)
