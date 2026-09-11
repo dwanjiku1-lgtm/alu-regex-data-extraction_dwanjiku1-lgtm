@@ -23,11 +23,14 @@ alu-regex-data-extraction/
  Data Type , How It's Found & Protected , Example Output 
 
  1.ALU Email Addresses;
-  Matches emails ending in `@alueducation.com`, `@alumni.alueducation.com`, or `@si.alueducation.com`. The part before the `@` is partly hidden.  `"a**********e@alueducation.com"` 
+  Matches emails ending in `@alueducation.com`, `@alumni.alueducation.com`, or `@si.alueducation.com`. The part before the `@` is partly hidden.  `"a**********e@alueducation.com"`
+
  2.Credit Card Numbers;
- Looks for 13–19 digit sequences, checks them with the Luhn Algorithm, and only keeps the last 4 digits visible. `"****-****-****-1881"` 
+ Looks for 13–19 digit sequences, checks them with the Luhn Algorithm, and only keeps the last 4 digits visible. `"****-****-****-1881"`
+
  3.URLs;
   Picks up links starting with `http://`, `https://`, or `www.`.  `"https://portal.alueducation.com"` 
+
  4.Phone Numbers;
   Picks up international-style numbers that start with a `+` and a country code.  `"+250 788 123 456"` 
 
@@ -40,8 +43,10 @@ Every input passes through a cleanup step (`sanitize_input()`) that removes HTML
 
 2.Doesn't trust regex alone: 
 A string of digits isn't treated as a valid credit card just because it's the right length — it also has to pass the Luhn checksum (`is_valid_luhn()`) before it's accepted.
+
 3.Masks sensitive info right away:
 As soon as a card number or email is found, it gets partially hidden using `mask_email()` and `mask_credit_card()`. The full, unmasked versions are never written to the output file or printed anywhere.
+
 4.Regex written to avoid slowdowns:
 The patterns use clear character rules and word boundaries (`\b`) instead of open-ended, nested patterns — this keeps the script fast and avoids it getting stuck processing weird or malicious input (a problem known as ReDoS).
 
